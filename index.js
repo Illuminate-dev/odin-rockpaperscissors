@@ -48,32 +48,40 @@ function playRound(playerSelection, computerSelection) {
 function game() {
     let playerScore = 0;
     let computerScore = 0;
+    let roundNumber = 1;
 
-    for (let i = 0; i < 5; i++) {
-        const playerInput = prompt("Rock, Paper, or Scissors?");
-        const round = playRound(playerInput, computerPlay());
+    const buttons = document.querySelectorAll("button");
+    buttons.forEach((button) => {
+        button.addEventListener('click', e => {
+            const round = playRound(button.id, computerPlay());
+            const winMessage = document.querySelector('#winner');
+            const score = document.querySelector("#score");
+            winMessage.textContent = round[0];
+            if (round[1] === 'player') {
+                playerScore++;
+            } else if (round[1] === 'computer') {
+                computerScore++;
+            } else {
+                roundNumber--;
+            }
 
-        console.log(round[0]);
+            if (roundNumber === 5 || playerScore === 3 || computerScore === 3) {
+                score.textContent = "Game over. " + (playerScore > computerScore ? "You Won!" : "You Lost.");
+                playerScore = 0;
+                computerScore = 0;
+                roundNumber = 0;
+                return;
+            }
 
-        if (round[1] === 'player') {
-            playerScore++;
-        } else if (round[1] === 'computer') {
-            computerScore++;
-        } else {
-            i--;
-        }
-
-        console.log(
-            `It's ${playerScore}-${computerScore}!`
-            .concat(playerScore > computerScore ? " You're up!" : (
-            playerScore !== computerScore ? 
-            " The computer's winning!" : " Tie game!"
-            )));
-        5-i !== 1 ? console.log(`${5-i} rounds left!`) : null;
-
-    }
-
-    playerScore > computerScore ? console.log("You Won!") : console.log("You Lost.");
+            score.textContent = `It's ${playerScore}-${computerScore}!`
+                .concat(playerScore > computerScore ? " You're up!" : (
+                playerScore !== computerScore ? 
+                " The computer's winning!" : " Tie game!"
+            ));
+            roundNumber++;
+            
+        });
+    });
 
 }
 

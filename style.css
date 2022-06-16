@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+    padding: 0;
+    background-color: #222222;
+}
+
+.button-container {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+button {
+    background-color: #222222;
+    color: white;
+    border-color: orange;
+    border-radius: 20px;
+    width: 200px;
+    height: 200px;
+    font-size: 30px;
+}
+
+#results {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    color: white;
+    font-size: 20px;
+}
